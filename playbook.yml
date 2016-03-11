@@ -1,0 +1,18 @@
+---
+- hosts: "*"
+  become: yes
+  become_method: sudo
+  tasks: 
+  - name: "create a user"
+    user: name="{{ item.name }}"
+    with_items: "{{users}}"
+  - name: "add ssh key"
+    authorized_key: user="{{ item.name }}" key="{{ item.key }}"
+    with_items: "{{users}}"
+  vars:
+    users:
+    - name: george
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm57cXosJc6O7myfScUNOa7FBoKk02/He8bnnZsv9FvEb8IviTzhmHFt9iU5rTqXfM8OWc7OaYkKKUO83naGiJD4rTtOnV6/syE83cmOYy6jVhAWeYCcNHUyHfhad3h1i66U6WjEbjuM/8h9iLns1XuS0juCNSCrJLLyRz+GP5MIVsz01bqM1yGYbbzKkq2R0p/KTFFiCOdFGrxZpT/TNLROas5F0y6uuBY94STCk00ycHSQ1DF/dgQo3FIvEnNmvebLx3Ox4AMLjHVump5aWIeCJ9eNSFRbnsTDvhzULHprecxH0ifi6xu9WEf1goIkINAUWrOVQ7CkhWu5VShLll robotarmy@Ryans-MBP.lan"
+    - name: jorge
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm57cXosJc6O7myfScUNOa7FBoKk02/He8bnnZsv9FvEb8IviTzhmHFt9iU5rTqXfM8OWc7OaYkKKUO83naGiJD4rTtOnV6/syE83cmOYy6jVhAWeYCcNHUyHfhad3h1i66U6WjEbjuM/8h9iLns1XuS0juCNSCrJLLyRz+GP5MIVsz01bqM1yGYbbzKkq2R0p/KTFFiCOdFGrxZpT/TNLROas5F0y6uuBY94STCk00ycHSQ1DF/dgQo3FIvEnNmvebLx3Ox4AMLjHVump5aWIeCJ9eNSFRbnsTDvhzULHprecxH0ifi6xu9WEf1goIkINAUWrOVQ7CkhWu5VShLll robotarmy@Ryans-MBP.lan"
+
